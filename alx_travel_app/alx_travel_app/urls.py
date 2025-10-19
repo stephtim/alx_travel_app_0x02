@@ -16,13 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
-
+from django.urls import path
+from .views import initiate_payment
 from django.urls import re_path
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 
+urlpatterns = [
+    path('initiate-payment/', initiate_payment, name='initiate_payment'),
+]
 
 schema_view = get_schema_view(
    openapi.Info(

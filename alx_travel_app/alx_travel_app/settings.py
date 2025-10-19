@@ -104,6 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CHAPA_SECRET_KEY = CHAPUBK_TEST-o0ISElpPw3YdM1TRqUh3X7jmDipSp3sK
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -126,3 +128,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis broker
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+

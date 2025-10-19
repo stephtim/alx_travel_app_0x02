@@ -80,3 +80,43 @@ class Review(models.Model):
         
     def __str__(self):
         return f"Review for {self.listing.title} ({self.rating}/5)"
+
+class Payment(models.Model):
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('SUCCESS', 'Success'),
+        ('FAILED', 'Failed'),
+    ]
+
+    booking_reference = models.CharField(
+        max_length=100,
+        unique=True,
+        help_text="Unique reference for the booking this payment belongs to"
+    )
+    transaction_id = models.CharField(
+        max_length=150,
+        unique=True,
+        help_text="Transaction ID returned by the payment gateway (e.g., Chapa)"
+    )
+    amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount paid in the selected currency"
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='PENDING',
+        help_text="Current status of the payment"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="Date and time when the payment record was created"
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="Date and time when the payment record was last updated"
+    )
+
+    def __str__(self):
+        return f"Payment {self.transaction_id} - {self.status}"
