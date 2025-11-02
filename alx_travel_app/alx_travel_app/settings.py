@@ -27,8 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Celery configuration
+CELERY_BROKER_URL = 'amqp://localhost'  # RabbitMQ broker
+CELERY_RESULT_BACKEND = 'django-db'     # Store task results in Django DB
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,10 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'listings',
     'rest_framework',
     "corsheaders",
     
+     
    'drf_yasg',
 ]
 
